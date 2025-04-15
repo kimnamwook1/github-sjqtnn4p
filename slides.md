@@ -124,7 +124,7 @@ flowchart LR
 ## 4. 기술 스택 및 구현 방안
 
 ```mermaid
-graph TB
+graph LR
     subgraph "프론트엔드"
         A1[React.js]
         A2[파일 업로드 컴포넌트]
@@ -235,7 +235,7 @@ graph LR
 ## 4.5 멀티모달 음악 이해를 위한 데이터 분석
 
 ```mermaid
-graph LR
+graph TB
     A[음악 데이터 분석] --> B[정량적 데이터]
     A --> C[정성적 데이터]
     
@@ -280,7 +280,7 @@ graph LR
 ## 4.6 정성적 요소의 데이터 분석 방법
 
 ```mermaid
-graph LR
+graph TB
     A[정성적 요소 분석] --> B[감정 분석 모델]
     A --> C[장르 분류 모델]
     A --> D[맥락 분석]
@@ -349,7 +349,7 @@ gantt
     내부 테스트 배포                 :d2, after d1, 3d
     개선 및 버그 수정                :d3, after d2, 10d
 ```
-
+ㄴ
 ---
 
 ## MVP 제외 기능 (참고)
