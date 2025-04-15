@@ -1,636 +1,368 @@
----
-# You can also start simply with 'default'
-theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
-class: text-center
-# https://sli.dev/features/drawing
-drawings:
-  persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
-mdc: true
----
-
-# Welcome to Slidev
-
-Presentation slides for developers
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
-
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-transition: fade-out
----
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc text-sm minDepth="1" maxDepth="2" />
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
+# MVCP (Music Video Creator Platform)
+## 1차 MVP 기획서 - 내부용
 
 ---
 
-# Components
+## 목차
 
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
+1. MVP 개요
+2. 핵심 기능 구현 계획
+3. 사용자 플로우
+4. 기술 스택 및 구현 방안
+5. 개발 로드맵
 
 ---
 
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
-
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
+## 1. MVP 개요
 
 ```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
+graph LR
+    A[음원 업로드] --> B[음악 분석]
+    B --> C[스타일 추천]
+    C --> D[사용자 스타일 선택]
+    D --> E[AI 서비스 추천]
+    
+    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style B fill:#eeac99,stroke:#333,stroke-width:2px
+    style C fill:#e06377,stroke:#333,stroke-width:2px
+    style D fill:#c83349,stroke:#333,stroke-width:2px
+    style E fill:#5b9aa0,stroke:#333,stroke-width:2px
 ```
 
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
+- **개요:** 사용자가 업로드한 음원을 분석하여 비주얼 스타일을 추천하고, 적합한 AI 서비스 추천
+- **목표:**
+  - 음악 분석 → 스타일 추천 → AI 툴 추천의 핵심 플로우 구현
+  - 기술적 타당성 검증 및 개발 방향성 확립
 
 ---
 
-# Monaco Editor
+## 2. 핵심 기능 구현 계획
 
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
+```mermaid
+graph TD
+    A[MVCP 주요 기능] --> B[음원 업로드]
+    A --> C[음악 분석]
+    A --> D[스타일 추천]
+    A --> E[사용자 선택]
+    A --> F[AI 생성 서비스 추천]
+    
+    C --> C1[BPM/템포]
+    C --> C2[분위기\n밝음/어두움]
+    C --> C3[추정 장르]
+    C --> C4[에너지 레벨]
+    
+    D --> D1[시각적 스타일]
+    D --> D2[영상 스타일]
+    
+    F --> F1[이미지 생성 AI]
+    F --> F2[영상 생성 AI]
 ```
 
 ---
-layout: center
-class: text-center
+
+## 2.1 음원 업로드 및 분석
+
+- **파일 업로드:**
+  - 지원 포맷: MP3, WAV, FLAC
+  - 파일 크기 제한: 50MB
+  - 드래그 앤 드롭 및 파일 선택 인터페이스
+
+- **음악 분석 모듈:**
+  - BPM 및 템포 분석
+  - 키(Key) 및 화성 구조 분석
+  - 분위기 분석 (밝음/어두움, 에너지 수준)
+  - 장르 추정
+
 ---
 
-# Learn More
+## 2.2 스타일 추천 및 매칭 로직
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+- **스타일 카테고리:**
+  - 시각적 스타일 (10가지): 애니메이션, 실사, 몽환적, 사이버펑크, 빈티지 등
+  - 영상 스타일 (5가지): 감성적, 역동적, 초현실적, 미니멀, 내러티브 중심 등
 
-<PoweredBySlidev mt-10 />
+- **매칭 로직:**
+  - 음악 특성과 스타일 태그 간 규칙 기반 매칭
+  - 예: 빠른 템포 + 높은 에너지 = 역동적/사이버펑크 스타일 추천
+  - 장르별 프리셋 스타일 활용 (Ex. EDM → 네온/미래적, 어쿠스틱 → 자연/빈티지)
+
+---
+
+## 2.3 AI 서비스 추천 시스템
+
+- **AI 툴 데이터베이스:**
+  - 이미지 생성 AI: Midjourney, Stable Diffusion, DALL-E 등
+  - 영상 생성 AI: Pika, Runway, Kling, Sora 등
+
+- **추천 매커니즘:**
+  - 스타일 특성과 AI 툴 강점 매핑
+  - 추천 시 제공 정보: 툴 이름, 특징, 가격, 링크, 활용 예시
+
+---
+
+## 3. 사용자 플로우
+
+```mermaid
+flowchart LR
+    A[사용자 웹사이트 접속] --> B[시작하기 버튼 클릭]
+    B --> C[음원 파일 업로드 인터페이스]
+    C --> D[음원 파일 선택 및 업로드]
+    D --> E[음악 분석 진행\n로딩 표시]
+    E --> F[분석 결과 기반 추천 스타일 목록 표시]
+    F --> G[사용자 선호 스타일 조합 선택]
+    G --> H[추천 AI 서비스 목록 표시]
+    
+    subgraph 추천 AI 서비스
+    H --> I[이미지 생성 AI 서비스]
+    H --> J[영상 생성 AI 서비스]
+    H --> K[각 서비스별 정보 및 링크]
+    end
+```
+
+---
+
+## 4. 기술 스택 및 구현 방안
+
+```mermaid
+graph TB
+    subgraph "프론트엔드"
+        A1[React.js]
+        A2[파일 업로드 컴포넌트]
+        A3[결과 표시 UI]
+    end
+    
+    subgraph "백엔드"
+        B1[Python - Flask]
+        B2[음악 분석 모듈<br>Librosa/Essentia]
+        B3[스타일 매칭 엔진]
+        B4[AI 툴 추천 API]
+    end
+    
+    subgraph "데이터베이스"
+        C1[스타일 매핑 룰셋]
+        C2[AI 툴 메타데이터]
+    end
+    
+    A1 --> B1
+    A2 --> B2
+    B1 --> B2
+    B2 --> B3
+    B3 --> B4
+    B3 --> C1
+    B4 --> C2
+```
+
+---
+
+## 4.1 프론트엔드 구현
+
+- **기술 스택:**
+  - React.js (상태 관리: Redux 또는 Context API)
+  - 반응형 디자인 (모바일 지원)
+  - 파일 업로드: React-Dropzone
+
+- **주요 컴포넌트:**
+  - 파일 업로드 인터페이스
+  - 분석 로딩 화면 (로딩 애니메이션 및 진행 표시)
+  - 스타일 추천 카드 컴포넌트
+  - AI 툴 추천 결과 화면
+
+---
+
+## 4.2 백엔드 구현
+
+- **기술 스택:**
+  - Python + Flask/FastAPI
+  - 음악 분석: Librosa/Essentia 라이브러리
+  - 파일 처리: FFmpeg 통합
+
+- **API 엔드포인트:**
+  - `/upload` - 파일 업로드 및 저장
+  - `/analyze` - 음악 파일 분석
+  - `/recommend-styles` - 스타일 추천
+  - `/recommend-tools` - AI 툴 추천
+
+---
+
+## 4.3 기술 스택 선택 이유
+
+```mermaid
+graph LR
+    A[기술 선택 기준] --> B[개발 속도]
+    A --> C[확장성]
+    A --> D[유지보수성]
+    A --> E[자동화 용이성]
+    
+    B --> F[Python + Flask]
+    C --> G[모듈형 아키텍처]
+    D --> H[분리된 컴포넌트]
+    E --> I[CI/CD 통합 용이성]
+```
+
+- **Python + Flask 선택 이유:**
+  - 음악 분석 라이브러리(Librosa, Essentia)와의 직접 통합
+  - 빠른 프로토타이핑과 MVP 개발 속도
+  - 데이터 사이언스 및 ML 파이프라인과의 호환성
+
+- **React 선택 이유:**
+  - 컴포넌트 기반 아키텍처로 재사용성 향상
+  - 상태 관리가 용이하여 복잡한 사용자 플로우 처리에 적합
+  - 대규모 개발자 커뮤니티 및 풍부한 UI 라이브러리
+
+- **자동화 관점의 기술 선택:**
+  - CI/CD 파이프라인 구축이 용이한 기술 스택
+  - 테스트 자동화(Jest, Pytest)와의 통합성
+  - 배포 프로세스 자동화 용이(Docker, AWS/GCP와의 통합)
+
+---
+
+## 4.4 음악 분석 구현 상세
+
+- **Librosa 라이브러리 활용:**
+  - 템포 감지: `librosa.beat.tempo()`
+  - 스펙트럼 분석: `librosa.feature.melspectrogram()`
+  - 에너지 레벨: `librosa.feature.rms()`
+  - 음색 분석: `librosa.feature.mfcc()`
+
+- **매핑 알고리즘:**
+  - 분석 결과를 0-1 범위로 정규화
+  - 특성 벡터를 스타일 태그 매핑에 사용
+  - 초기 버전: 규칙 기반 (if-then) 매핑
+  - 향후: 머신러닝 기반 매핑 검토
+
+---
+
+## 4.5 멀티모달 음악 이해를 위한 데이터 분석
+
+```mermaid
+graph LR
+    A[음악 데이터 분석] --> B[정량적 데이터]
+    A --> C[정성적 데이터]
+    
+    B --> B1[주파수 특성]
+    B --> B2[시간적 특성]
+    B --> B3[에너지 특성]
+    
+    C --> C1[감정적 특성]
+    C --> C2[장르 특성]
+    C --> C3[문화적 맥락]
+    
+    B1 --> D[스펙트로그램]
+    B2 --> E[템포/리듬 패턴]
+    B3 --> F[다이나믹스]
+    
+    C1 --> G[감정 태깅]
+    C2 --> H[장르 분류]
+    C3 --> I[사용 컨텍스트]
+```
+
+### 정량적 데이터 (객관적 측정)
+- **음향학적 특성:**
+  - **스펙트럼 중심(Spectral Centroid)**: 밝기/어두움 측정 (0-20kHz)
+  - **템포/BPM**: 속도감 (40-200 BPM)
+  - **스펙트럼 대비(Spectral Contrast)**: 음향적 대비 측정 (0-1)
+  - **리듬 패턴**: 비트 강도와 분포 분석
+  - **하모닉/퍼커시브 분리**: 멜로디와 타악기 성분 비율
+
+### 정성적 데이터 (주관적/해석적)
+- **감정적 특성:**
+  - **Valence(긍정/부정)**: 음악이 전달하는 감정적 방향성 (-1~1)
+  - **Arousal(각성/진정)**: 에너지와 흥분도 수준 (0-1)
+  - **Dominance(지배/복종)**: 음악의 지배적/공격적 느낌 정도 (0-1)
+  
+- **장르 및 맥락적 특성:**
+  - **장르 확률 분포**: 다양한 장르에 속할 확률
+  - **시대적 특성**: 빈티지/모던 스펙트럼 위치
+  - **문화적 연관성**: 특정 문화권과의 연관도
+
+---
+
+## 4.6 정성적 요소의 데이터 분석 방법
+
+```mermaid
+graph LR
+    A[정성적 요소 분석] --> B[감정 분석 모델]
+    A --> C[장르 분류 모델]
+    A --> D[맥락 분석]
+    A --> E[사용자 피드백 통합]
+    
+    B --> B1[감정 맵핑 데이터셋]
+    B --> B2[딥러닝 감정 분류]
+    
+    C --> C1[지도학습 장르 분류기]
+    C --> C2[Transfer Learning]
+    
+    D --> D1[MIR 데이터베이스]
+    D --> D2[크로스모달 매핑]
+    
+    E --> E1[A/B 테스트]
+    E --> E2[피드백 루프]
+```
+
+### 감정 분석 접근법
+- **대규모 데이터셋 기반 학습:**
+  - **MuSe 데이터셋**: 다양한 장르와 문화권의 2,000+ 곡에 감정 라벨링
+  - **DEAM 데이터셋**: 초단위 감정 태깅이 포함된 1,800+ 곡의 데이터셋
+  
+- **딥러닝 기반 감정 분석:**
+  - **CNN + LSTM 하이브리드 모델**: 스펙트로그램 패턴과 시간적 특성 동시 분석
+  - **Transformer 기반 모델**: 음악의 구조적 문맥까지 파악하는 고급 분석
+  - **앙상블 접근**: 여러 모델의 예측을 종합하여 정확도 향상
+  
+### 지도학습 + 비지도학습 조합
+- **준지도 학습 접근법:**
+  - 소량의 라벨링된 데이터와 대량의 비라벨 데이터 결합
+  - 사전 훈련된 오디오 모델 활용 (예: PANNs, VGGish)
+  
+- **맥락 분석 기법:**
+  - **문화적 맥락 마이닝**: 웹에서 수집된 음악 리뷰/설명 텍스트 분석
+  - **협업 필터링**: 유사한 취향의 사용자 그룹 분석
+  - **크로스모달 통합**: 음악-이미지-텍스트 간 의미론적 상관관계 활용
+
+### 사용자 피드백 통합 시스템
+- **A/B 테스트 프레임워크:** 추천 알고리즘 변형 실시간 테스트
+- **사용자 인터랙션 로깅:** 클릭, 체류 시간, 선택 패턴 등 행동 데이터 수집
+- **강화학습 적용:** 사용자 피드백을 보상 신호로 활용한 추천 시스템 개선
+
+---
+
+## 5. 개발 로드맵
+
+```mermaid
+gantt
+    title MVCP MVP 개발 로드맵
+    dateFormat  YYYY-MM-DD
+    section 기초 설정
+    프로젝트 세팅 & 저장소 구성      :a1, 2025-05-01, 7d
+    기본 프론트엔드 구조 구축        :a2, after a1, 10d
+    기본 백엔드 API 구조 구축        :a3, after a1, 10d
+    section 핵심 기능
+    파일 업로드 기능                 :b1, after a2, 7d
+    음악 분석 모듈 개발              :b2, after a3, 14d
+    스타일 매칭 모듈 개발            :b3, after b2, 10d
+    AI 툴 추천 모듈 개발             :b4, after b3, 7d
+    section UI/UX
+    사용자 인터페이스 개발           :c1, after b1, 14d
+    결과 화면 구현                   :c2, after c1, 10d
+    section 테스트 & 배포
+    통합 테스트                      :d1, after b4, 7d
+    내부 테스트 배포                 :d2, after d1, 3d
+    개선 및 버그 수정                :d3, after d2, 10d
+```
+
+---
+
+## MVP 제외 기능 (참고)
+
+- 컷 분할 및 프롬프트 자동 생성
+- 플랫폼 내 직접적인 AI 이미지/영상 생성
+- 프롬프트/이미지 편집 기능
+- 사용자 계정 및 프로젝트 관리
+- 결과물 저장 및 라이브러리
+- 결제/유료 기능
+
+---
+
+## 감사합니다
+
+### 질문이나 피드백 부탁드립니다
